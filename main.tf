@@ -54,13 +54,17 @@ data "aws_iam_policy_document" "default" {
   }
 }
 data "aws_ami" "default" {
-  count       = var.ami == "" ? 1 : 0
-  most_recent = "true"
+  most_recent = true
+  owners      = ["self", "472481232510"]
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+    values = ["rhel-8.8-*"]
   }
+}
+
+  count       = var.ami == "" ? 1 : 0
+  most_recent = "true"
 
   filter {
     name   = "virtualization-type"
